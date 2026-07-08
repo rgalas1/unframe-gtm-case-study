@@ -56,7 +56,7 @@
         }
 
         .nav-inner { display: flex; align-items: center; justify-content: space-between; }
-        .logo { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 600; color: var(--accent-primary); letter-spacing: 0.12em; text-transform: uppercase; }
+        .logo { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 600; color: var(--accent-primary); letter-spacing: 0.12em; text-transform: uppercase; white-space: nowrap; }
         .logo span { color: var(--text-primary); font-weight: 400; }
         
         .nav-links { display: flex; align-items: center; gap: 40px; list-style: none; }
@@ -100,7 +100,7 @@
         .rating-badge { background: rgba(197, 168, 128, 0.1); border: 1px solid var(--accent-dark); color: var(--accent-light); padding: 4px 12px; border-radius: 100px; font-size: 12px; font-weight: 600; letter-spacing: 0.1em; white-space: nowrap; flex-shrink: 0; }
         
         .candidate-bullets { margin-top: 16px; margin-bottom: 24px; list-style: none; flex-grow: 1; }
-        .candidate-bullets.strategy-list { margin-top: 24px; margin-bottom: 0; max-width: 800px; }
+        .candidate-bullets.strategy-list { margin-top: 32px; margin-bottom: 0; max-width: 800px; }
         .candidate-bullets li { position: relative; padding-left: 20px; margin-bottom: 12px; font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
         .candidate-bullets li::before { content: '→'; position: absolute; left: 0; color: var(--accent-primary); font-family: monospace; }
         .candidate-bullets strong { color: var(--text-primary); font-weight: 500; }
@@ -125,7 +125,7 @@
 
     <nav class="nav">
         <div class="container nav-inner">
-            <a href="#" class="logo">Unframe<span>Case Study</span></a>
+            <a href="#" class="logo">Unframe <span>Case Study</span></a>
             <ul class="nav-links">
                 <li><a href="#strategy">Strategy</a></li>
                 <li><a href="#framework">Framework</a></li>
@@ -152,7 +152,7 @@
                 <div class="section-label">01. Search Strategy</div>
                 <h2 class="section-title">Reading Between the Lines</h2>
                 <p class="hero-desc" style="margin-bottom: 0;">While a specific territory was not defined, I went for a targeted geographic strategy focusing on major enterprise hubs. Proximity to Fortune 500 HQs and tier-one travel infrastructure is critical for executing complex, multi-threaded deal cycles.</p>
-                <p class="hero-desc" style="margin-top: 16px; margin-bottom: 0;">Beyond geography, I evaluated candidates against the core elements required to thrive in this specific GTM motion, prioritizing five critical markers:</p>
+                <p class="hero-desc" style="margin-top: 24px; margin-bottom: 0;">Beyond geography, I evaluated candidates against the core elements required to thrive in this specific GTM motion, prioritizing five critical markers:</p>
                 <ul class="candidate-bullets strategy-list">
                     <li><strong>Stage-Relevant Scaling:</strong> Cross-referencing tenure against historical company growth phases to identify reps who navigated the ambiguity of an evolving GTM playbook and understand what good looks like when scaling.</li>
                     <li><strong>Enterprise Deal Mechanics:</strong> The ability to move beyond technical evaluators and consistently build consensus among C-suite economic buyers on complex, $250K+ ACV deals.</li>
