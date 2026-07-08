@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unframe | Strategic AE Case Study</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Libre+Franklin:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --accent-primary: #C5A880; 
+            --accent-light: #DFCDA8;
+            --accent-dark: #8C7355;
+            --bg-dark: #0A0A0A;
+            --bg-card: #141414;
+            --bg-card-hover: #1C1C1C;
+            --text-primary: #F0EDE6;
+            --text-secondary: #A39E93;
+            --text-muted: #6B6862;
+            --border-color: #292826;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Libre Franklin', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.7;
+            font-weight: 300;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; opacity: 0.04; z-index: 9999;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 500; line-height: 1.2; letter-spacing: 0.02em;
+        }
+
+        a { color: inherit; text-decoration: none; transition: color 0.3s ease; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+
+        .nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            padding: 24px 0; background: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav-inner { display: flex; align-items: center; justify-content: space-between; }
+        .logo { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 600; color: var(--accent-primary); letter-spacing: 0.12em; text-transform: uppercase; }
+        .logo span { color: var(--text-primary); font-weight: 400; }
+        
+        .nav-links { display: flex; align-items: center; gap: 40px; list-style: none; }
+        .nav-links a { font-size: 12px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-secondary); transition: color 0.3s ease; }
+        .nav-links a:hover { color: var(--accent-light); }
+
+        .hero { min-height: 70vh; display: flex; align-items: center; position: relative; padding: 160px 0 80px; border-bottom: 1px solid var(--border-color); }
+        .hero::after {
+            content: ''; position: absolute; top: 0; right: 0; width: 50%; height: 100%;
+            background: radial-gradient(ellipse at right center, rgba(197, 168, 128, 0.05) 0%, transparent 70%); pointer-events: none;
+        }
+
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 12px; padding: 8px 16px;
+            border: 1px solid var(--border-color); border-radius: 100px; margin-bottom: 32px;
+            font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-secondary);
+        }
+
+        .hero-title { font-size: clamp(40px, 5vw, 64px); color: var(--text-primary); margin-bottom: 24px; }
+        .hero-title span { color: var(--accent-primary); font-style: italic; }
+        .hero-desc { font-size: 18px; color: var(--text-secondary); max-width: 750px; line-height: 1.8; margin-bottom: 48px; }
+
+        section { padding: 70px 0; border-bottom: 1px solid var(--border-color); }
+        .section-header { margin-bottom: 40px; max-width: 800px; }
+        .section-label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--accent-primary); margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+        .section-label::before { content: ''; display: block; width: 24px; height: 1px; background-color: var(--accent-primary); }
+        .section-title { font-size: clamp(32px, 4vw, 44px); color: var(--text-primary); margin-bottom: 20px; }
+
+        .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+
+        .card { background: var(--bg-card); border: 1px solid var(--border-color); padding: 40px 32px; transition: all 0.4s ease; position: relative; overflow: hidden; display: flex; flex-direction: column; }
+        .card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: var(--accent-primary); transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease; }
+        .card:hover { transform: translateY(-4px); background: var(--bg-card-hover); border-color: #3A3835; }
+        .card:hover::before { transform: scaleX(1); }
+
+        .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; gap: 16px; }
+        .card-title { font-size: 24px; color: var(--text-primary); margin-bottom: 4px; }
+        .card-subtitle { font-size: 14px; color: var(--accent-primary); letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 16px; display: block;}
+        
+        .rating-badge { background: rgba(197, 168, 128, 0.1); border: 1px solid var(--accent-dark); color: var(--accent-light); padding: 4px 12px; border-radius: 100px; font-size: 12px; font-weight: 600; letter-spacing: 0.1em; white-space: nowrap; flex-shrink: 0; }
+        
+        .candidate-bullets { margin-top: 16px; margin-bottom: 24px; list-style: none; flex-grow: 1; }
+        .candidate-bullets.strategy-list { margin-top: 24px; margin-bottom: 0; max-width: 800px; }
+        .candidate-bullets li { position: relative; padding-left: 20px; margin-bottom: 12px; font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+        .candidate-bullets li::before { content: '→'; position: absolute; left: 0; color: var(--accent-primary); font-family: monospace; }
+        .candidate-bullets strong { color: var(--text-primary); font-weight: 500; }
+
+        .btn-linkedin { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent-primary); border-top: 1px solid var(--border-color); padding-top: 20px; transition: color 0.3s ease; }
+        .btn-linkedin:hover { color: var(--text-primary); }
+
+        .spotlight-section { background: linear-gradient(180deg, var(--bg-dark) 0%, #0F0E0D 100%); position: relative; }
+        .spotlight-card { border-color: var(--accent-primary); background: rgba(197, 168, 128, 0.02); padding: 50px; }
+
+        .wildcard-section { background: linear-gradient(180deg, #0F0E0D 0%, #12100E 100%); position: relative; }
+        .wildcard-card { border-color: var(--accent-dark); background: rgba(197, 168, 128, 0.03); }
+
+        .footer { padding: 60px 0; text-align: center; }
+        .footer p { font-size: 13px; color: var(--text-muted); letter-spacing: 0.05em; }
+
+        @media (max-width: 992px) { .grid-3 { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } .nav-links { display: none; } }
+    </style>
+</head>
+<body>
+
+    <nav class="nav">
+        <div class="container nav-inner">
+            <a href="#" class="logo">Unframe<span>Case Study</span></a>
+            <ul class="nav-links">
+                <li><a href="#strategy">Strategy</a></li>
+                <li><a href="#framework">Framework</a></li>
+                <li><a href="#shortlist">Top 10 Shortlist</a></li>
+                <li><a href="#spotlight">Performance Spotlight</a></li>
+                <li><a href="#wildcard">Network Advantage</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container hero-content">
+            <div class="hero-badge">Executive Search Case Study</div>
+            <h1 class="hero-title">Strategic AE <span>Market Map</span></h1>
+            <p class="hero-desc">
+                Having navigated the exact Series B inflection point while scaling the GTM function at Shapr3D, I understand the unique blend of enterprise maturity and startup scrappiness this stage demands. This shortlist maps ten candidates whose career trajectories align perfectly with the specific complexities of selling Unframe's AI-first transformation.
+            </p>
+        </div>
+    </header>
+
+    <section id="strategy">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">01. Search Strategy</div>
+                <h2 class="section-title">Reading Between the Lines</h2>
+                <p class="hero-desc" style="margin-bottom: 0;">While a specific territory was not defined, I deployed a targeted geographic strategy focusing on major enterprise hubs (SF, NYC, Chicago, London, Amsterdam). Proximity to Fortune 500 HQs and tier-one travel infrastructure is critical for executing complex, multi-threaded deal cycles.</p>
+                <p class="hero-desc" style="margin-top: 16px; margin-bottom: 0;">Beyond geography, I evaluated candidates against the core elements required to thrive in this specific GTM motion, prioritizing five critical markers:</p>
+                <ul class="candidate-bullets strategy-list">
+                    <li><strong>Stage-Relevant Scaling:</strong> Cross-referencing tenure against historical company growth phases to identify reps who navigated the ambiguity of an evolving GTM playbook and understand what good looks like at Series B.</li>
+                    <li><strong>Enterprise Deal Mechanics:</strong> The ability to move beyond technical evaluators and consistently build consensus among C-suite economic buyers on complex, $250K+ ACV deals.</li>
+                    <li><strong>Greenfield Pipeline Generation:</strong> Demonstrated history of manufacturing pipeline from scratch as a "first hire" or regional builder, without relying on massive inbound engines.</li>
+                    <li><strong>Outcome-Led Translation:</strong> Backgrounds in deep tech, data, or AI that require translating highly complex capabilities into clear, multi-million dollar business ROI.</li>
+                    <li><strong>Ambiguity Tolerance:</strong> The capacity to guide enterprise accounts from initial problem discovery through to POCs and platform adoption while the internal playbook is still being written.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="framework">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">02. Evaluation Framework</div>
+                <h2 class="section-title">Calibration & Matching</h2>
+                <p class="hero-desc">The candidates presented are all highly capable of succeeding at Unframe. The following scoring scale reflects the nuanced incrementality of their fit based on current career trajectory and immediate readiness for this exact Series B stage.</p>
+            </div>
+            <div class="grid-3">
+                <div class="card">
+                    <h3 class="card-title">Rating: 1</h3>
+                    <p class="card-desc"><strong>Exceptional Baseline Fit.</strong> Masters of the $250k+ technical sale within established enterprise data/AI giants. They have elite deal mechanics, though they may require a brief transition period to re-adapt to a Series B greenfield environment.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Rating: 2</h3>
+                    <p class="card-desc"><strong>The Scaling Hunter.</strong> Combines deep technical enterprise mechanics with verified experience navigating high-growth, evolving GTM motions. They have successfully built regional pipelines with minimal brand support.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title" style="color: var(--accent-primary);">Rating: 3</h3>
+                    <p class="card-desc"><strong>The 0-to-1 Architect.</strong> The perfect storm of Unframe’s criteria. They possess native AI/Data domain expertise, command $1M+ quotas, and have explicitly operated as founding AEs, proving they manufacture pipeline from absolute zero.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="shortlist">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">03. The Shortlist</div>
+                <h2 class="section-title">The Top 10 Shortlist</h2>
+            </div>
+            
+            <div class="grid-2">
+                <!-- Candidate 1 -->
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <h3 class="card-title">Farzad Reza</h3>
+                            <span class="card-subtitle">Palo Alto, CA | Google, Contextual AI, PlanetScale</span>
+                        </div>
+                        <span class="rating-badge">RATING: 3</span>
+                    </div>
+                    <ul class="candidate-bullets">
+                        <li><strong>The Headhunter Synthesis:</strong> I mapped Farzad because his tenure tracks perfectly against the 0-to-1 AI motion Unframe requires. Cross-referencing his move from PlanetScale (as the initial GTM hire) to Contextual AI, he demonstrates a deliberate appetite for early-stage ambiguity.</li>
+                        <li><strong>Alignment & Mechanics:</strong> He doesn't just sell products; he architects the foundational sales motions for deep-tech AI agents. He has expert-level experience multi-threading across technical teams and business economic buyers under an unassisted outbound model.</li>
+                    </ul>
+                    <a href="https://www.linkedin.com/in/rezaassa" target="_blank" class="btn-linkedin">View LinkedIn Profile ↗</a>
+                </div>
+
+                <!-- Candidate 2 -->
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <h3 class="card-title">Sasha Balke</h3>
+                            <span class="card-subtitle">New York, NY | Databricks, Snowflake, Tabular</span>
+                        </div>
+                        <span class="rating-badge">RATING: 3</span>
+                    </div>
+                    <ul class="candidate-bullets">
+                        <li><strong>The Headhunter Synthesis:</strong> While Snowflake is a tech giant today, I isolated Sasha's profile because she rode the wave of their core hyper-growth phase. She didn't inherit a mature territory; she navigated their scaling years, building accounts from zero to seven figures.</li>
+                        <li><strong>Alignment & Mechanics:</strong> Her subsequent pivots to Founding AE roles at FixStream and Tabular confirm she still possesses the grit to build a market from scratch without relying on Snowflake-level brand equity.</li>
+                    </ul>
+                    <a href="https://www.linkedin.com/in/sashabalke" target="_blank" class="btn-linkedin">View LinkedIn Profile ↗</a>
+                </div>
+
+                <!-- Candidate 3 -->
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <h3 class="card-title">JP A. Lefebvre</h3>
+                            <span class="card-subtitle">Amsterdam, NL | Databricks, Comet, Apptimize</span>
+                        </div>
+                        <span class="rating-badge">RATING: 3</span>
+                    </div>
+                    <ul class="candidate-bullets">
+                        <li><strong>The Headhunter Synthesis:</strong> JP stood out during my audit due to the velocity of his promotions at Databricks: three distinct tier advancements in under two years. Pairing this with his experience selling complex MLOps at Comet signals incredible adaptability and drive.</li>
+                        <li><strong>Alignment & Mechanics:</strong> His trajectory reveals a rare balance. As a former Head of Sales at Apptimize, he understands how to build a GTM engine from the ground up, yet he possesses the polish to execute massive top-down enterprise data cycles.</li>
+                    </ul>
+                    <a href="https://www.linkedin.com/in/jpalefebvre" target="_blank" class="btn-linkedin">View LinkedIn Profile ↗</a>
+                </div>
+
+                <!-- Candidate 4 -->
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <h3 class="card-title">Josh Orner</h3>
+                            <span class="card-subtitle">Chicago, IL | Wiz, Moveworks, AppDynamics</span>
+                        </div>
+                        <span class="rating-badge">RATING: 3</span>
+                    </div>
+                    <ul class="candidate-bullets">
+                        <li><strong>The Headhunter Synthesis:</strong> Josh is a direct vertical match. I selected him because his trajectory proves an ability to articulate business ROI and transition enterprise accounts from problem discovery into structured platform adoption, the exact motion Unframe requires.</li>
+                        <li><strong>Alignment & Mechanics:</strong> He built out the regional footprint during Moveworks' Series B phase, navigating the highly ambiguous conversational AI workflow market. He knows exactly how to pitch AI agents to legacy enterprise buyers.</li>
+                    </ul>
+                    <a href="https://www.linkedin.com/in/josh-orner-37341394" target="_blank" class="btn-linkedin">View LinkedIn Profile ↗</a>
+                </div>
+                
+                <!-- Candidate 5 -->
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <h3 class="card-title">Nick Ruggieri</h3>
+                            <span class="card-subtitle">SF Bay Area | fal, Decagon, Koala, Twilio</span>
+                        </div>
+                        <span class="rating-badge">RATING: 3</span>
+                    </div>
+                    <ul class="candidate-bullets">
+                        <li><strong>The Headhunter Synthesis:</strong> Nick is a textbook 0-to-1 builder. By isolating his time as Employee #7 at Koala, I verified his ability to find early product-market fit and scale a revenue engine from a standstill through to its acquisition.</li>
+                        <li><strong>Alignment & Mechanics:</strong> He is currently executing deeply within modern generative AI ecosystems (Decagon, fal), proving he can handle the technical density Unframe demands while driving high-velocity outbound pipeline.</li>
+                    </ul>
+                    <a href="https://www.linkedin.com/in/nickruggieri" target="_blank" class="btn-linkedin">View LinkedIn Profile ↗</a>
+                </div>
+
+                <!-- Candidate 6 -->
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <h3 class="card-title">Darragh McCormack</h3>
+                            <span class="card-subtitle">London, UK | dbt Labs, Confluent, Salesforce</span>
+                        </div>
+                        <span class="rating-badge">RATING: 2</span>
+                    </div>
+                    <ul class="candidate-bullets">
+                        <li><strong>The Headhunter Synthesis:</strong> I targeted Darragh for his proven ability to scale European footprints. By cross-referencing his timeline as the first London AE for Workable with his later high-level enterprise execution at Confluent and dbt Labs, he proves he can land Tier 1 financial institutions while still remembering how to open a region cold.</li>
+                        <li><strong>Alignment & Mechanics:</strong> Note: As he recently took a Director title, an IC role at Unframe must be positioned to him as a highly lucrative, strategic builder opportunity to pull him back into the field.</li>
+                    </ul>
+                    <a href="https://www.linkedin.com/in/darmac2015" target="_blank" class="btn-linkedin">View LinkedIn Profile ↗</a>
+                </div>
+
+                <!-- Candidate 7 -->
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <h3 class="card-title">Sam Martin</h3>
+                            <span class="card-subtitle">London, UK | Wiz, Darktrace</span>
+                        </div>
+                        <span class="rating-badge">RATING: 2</span>
+                    </div>
+                    <ul class="candidate-bullets">
+                        <li><strong>The Headhunter Synthesis:</strong> Cybersecurity reps are inherently disciplined outbound hunters, but Sam's 8-year run at Darktrace is what flagged him. He survived and thrived during their most critical scaling years, proving he can navigate a fast-evolving GTM playbook.</li>
+                        <li><strong>Alignment & Mechanics:</strong> Transitioning that proactive, multi-threaded C-suite hunting pedigree into Wiz makes him an exceptional fit for Unframe's outcome-led, complex sales cycles.</li>
+                    </ul>
+                    <a href="https://www.linkedin.com/in/sj-martin" target="_blank" class="btn-linkedin">View LinkedIn Profile ↗</a>
+                </div>
+
+                <!-- Candidate 8 -->
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <h3 class="card-title">Desmond Moffett</h3>
+                            <span class="card-subtitle">London, UK | Databricks, Celonis, Qubit</span>
+                        </div>
+                        <span class="rating-badge">RATING: 2</span>
+                    </div>
+                    <ul class="candidate-bullets">
+                        <li><strong>The Headhunter Synthesis:</strong> Desmond's profile bridges an important gap: the intersection of raw data platform sales (Databricks) and top-down business process orchestration (Celonis). I mapped his early 4.5-year tenure at Qubit to verify his ability to navigate a company's scaling phase.</li>
+                        <li><strong>Alignment & Mechanics:</strong> He is highly trained in outcome-led value selling and process optimization, distancing himself from transactional feature-pushers and aligning perfectly with Unframe's transformation-focused ICP.</li>
+                    </ul>
+                    <a href="https://www.linkedin.com/in/desmondmoffett" target="_blank" class="btn-linkedin">View LinkedIn Profile ↗</a>
+                </div>
+                
+                <!-- Candidate 9 -->
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <h3 class="card-title">Jake Stroyan</h3>
+                            <span class="card-subtitle">London, UK | Wiz, Contentsquare, Trustpilot</span>
+                        </div>
+                        <span class="rating-badge">RATING: 2</span>
+                    </div>
+                    <ul class="candidate-bullets">
+                        <li><strong>The Headhunter Synthesis:</strong> Jake's history is a blueprint for high-velocity international scaling. I tracked his timeline from being an early UK sales hire at Trustpilot through to their IPO, followed by opening the MENA territory from scratch for Contentsquare.</li>
+                        <li><strong>Alignment & Mechanics:</strong> This signals an extreme comfort with ambiguity and unassisted outbound execution across multiple regions, backed by consecutive overachievement records at hyper-growth companies.</li>
+                    </ul>
+                    <a href="https://www.linkedin.com/in/jake-stroyan-0096b446" target="_blank" class="btn-linkedin">View LinkedIn Profile ↗</a>
+                </div>
+                
+                <!-- Candidate 10 -->
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <h3 class="card-title">Mark Staveley</h3>
+                            <span class="card-subtitle">SF Bay Area | Confluent, Couchbase, MongoDB</span>
+                        </div>
+                        <span class="rating-badge">RATING: 1</span>
+                    </div>
+                    <ul class="candidate-bullets">
+                        <li><strong>The Headhunter Synthesis:</strong> Mark represents the apex of top-down data infrastructure sales. I included him because his early DNA involved building outbound motions for MongoDB pre-Atlas and MarkLogic at Series B.</li>
+                        <li><strong>Alignment & Mechanics:</strong> While he operates at the highest levels of enterprise deal orchestration today and may require a brief adjustment period back to unassisted pipeline generation, his capacity to displace entrenched legacy databases directly with C-suite buyers is undeniable.</li>
+                    </ul>
+                    <a href="https://www.linkedin.com/in/markstaveleysf" target="_blank" class="btn-linkedin">View LinkedIn Profile ↗</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="spotlight" class="spotlight-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">04. Track Record Spotlight</div>
+                <h2 class="section-title">Performance Spotlight:<br>Validating the Profile</h2>
+                <p class="hero-desc">Theoretical alignment is valuable, but live execution is definitive. I personally headhunted Sam Keeley, cultivating the relationship over several weeks to pull him into Shapr3D, an environment with zero brand recognition for enterprise sales at the time. His inclusion here validates this search methodology.</p>
+            </div>
+            
+            <div class="card spotlight-card">
+                <div class="card-header">
+                    <div>
+                        <h3 class="card-title">Sam Keeley</h3>
+                        <span class="card-subtitle">Dublin, IE | Shapr3D, Gong, Personio</span>
+                    </div>
+                    <span class="rating-badge" style="background: rgba(197, 168, 128, 0.15); color: var(--text-primary); border-color: var(--accent-primary);">VERIFIED PLACEMENT</span>
+                </div>
+                <ul class="candidate-bullets">
+                    <li><strong>The Headhunt & Execution:</strong> Recruited directly to drive the transformation into a formalized enterprise sales engine. Since joining, he is tracking above quota and recently anchored a landmark $400,000 net-new transaction with Dyson (with a clear path to expand to $600K this year).</li>
+                    <li><strong>Alignment & Mechanics:</strong> He proves the model works: taking a rep who understands multi-threading and deploying them into a scaling GTM motion to manufacture 7-figure pipelines. He operates continuously with mid-to-high 7-figure quota frameworks and excels at translating technical solutions directly to executive economic buyers.</li>
+                </ul>
+                <a href="https://www.linkedin.com/in/samkeeley" target="_blank" class="btn-linkedin">View LinkedIn Profile ↗</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="wildcard" class="wildcard-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">05. The Network Advantage</div>
+                <h2 class="section-title">The Warm Network Wildcard</h2>
+                <p class="hero-desc">When establishing market presence in an expanding region, utilizing a trusted network significantly minimizes market friction. I originally headhunted Paul for Shapr3D; while practical timing didn't align, we remain close and checked in just three weeks ago. He is a warm contact, reflective of my broader GTM network across the US and EMEA (from SDRs to VP-level leaders) that Unframe can tap into immediately.</p>
+            </div>
+            
+            <div class="card wildcard-card">
+                <div class="card-header">
+                    <div>
+                        <h3 class="card-title">Paul Serilas</h3>
+                        <span class="card-subtitle">Barcelona, Spain | Akuity, Docker, Grafana Labs, Confluent</span>
+                    </div>
+                    <span class="rating-badge" style="background: var(--accent-dark); color: var(--text-primary); border: none;">WARM CONTACT</span>
+                </div>
+                <ul class="candidate-bullets">
+                    <li><strong>The Headhunter Synthesis:</strong> Specialized in technical DevOps, GitOps, and cloud observability ecosystems across New Relic, Confluent, Grafana Labs, and Docker. He has a consistent history of opening new territory frontiers and hitting initial region quotas.</li>
+                    <li><strong>Alignment & Mechanics:</strong> Serves as the Founding Enterprise AE EMEA for Akuity and was the initial Account Executive in Barcelona for Confluent. Highly disciplined in MEDDPICC and enterprise value frameworks, offering an accelerated path to pipeline conversion by bypassing cold tracking friction.</li>
+                </ul>
+                <a href="https://www.linkedin.com/in/paulserilas" target="_blank" class="btn-linkedin">View LinkedIn Profile ↗</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Strategic Search Portfolio. Prepared for Unframe.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
